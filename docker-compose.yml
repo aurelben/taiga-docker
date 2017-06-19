@@ -9,8 +9,10 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - ./database:/var/lib/postgresql/data
-    networks: 
-      - traefik-net
+    networks:
+      web:
+        external:
+          name: traefik-net
 
   taiga:
     build: .
@@ -33,5 +35,7 @@ services:
     volumes:
       - ./media:/usr/src/taiga-back/media
       - ./taiga-conf:/taiga
-    networks: 
-      - traefik-net
+    networks:
+      web:
+        external:
+          name: traefik-net
