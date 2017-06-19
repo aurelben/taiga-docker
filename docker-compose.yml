@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  postgres:
+  postgres-taiga:
     image: postgres
     environment:
       POSTGRES_DB: taiga
@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - ./database:/var/lib/postgresql/data
-    network_mode: traefik-net
+    network: traefik-net
 
   taiga:
     build: .
@@ -20,7 +20,7 @@ services:
       TAIGA_HOSTNAME: localhost
       # TAIGA_SSL: 'true' # To enable SSL, uncomment this line
 
-      TAIGA_DB_HOST: postgres
+      TAIGA_DB_HOST: postgres-taiga
       TAIGA_DB_NAME: taiga
       TAIGA_DB_USER: taiga
       TAIGA_DB_PASSWORD: password
@@ -32,4 +32,4 @@ services:
     volumes:
       - ./media:/usr/src/taiga-back/media
       - ./taiga-conf:/taiga
-    network_mode: traefik-net
+    network: traefik-net
