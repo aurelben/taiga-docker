@@ -24,10 +24,10 @@ services:
       TAIGA_DB_NAME: taiga
       TAIGA_DB_USER: taiga
       TAIGA_DB_PASSWORD: password
-    label: 
-      - traefik.port=80
-      - traefik.backend=my-taiga 
-      - traefik.frontend.rule=PathPrefix:/taiga
+    labels: 
+      - "traefik.port=80"
+      - "traefik.backend=my-taiga" 
+      - "traefik.frontend.rule=PathPrefix:/taiga"
 
     volumes:
       - ./media:/usr/src/taiga-back/media
