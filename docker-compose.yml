@@ -9,12 +9,10 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - ./database:/var/lib/postgresql/data
-    network_mode: my-net
+    network_mode: traefik-net
 
   taiga:
     build: .
-    ports:
-      - 80:80
       # - 443:443 # To enable SSL, uncomment this line
     restart: always
     environment:
@@ -26,7 +24,12 @@ services:
       TAIGA_DB_NAME: taiga
       TAIGA_DB_USER: taiga
       TAIGA_DB_PASSWORD: password
+    label: 
+      - traefik.port=80
+      - traefik.backend=my-taiga 
+      - traefik.frontend.rule=PathPrefix:/taiga
+
     volumes:
       - ./media:/usr/src/taiga-back/media
       - ./taiga-conf:/taiga
-    network_mode: my-net
+    network_mode: traefik-net
