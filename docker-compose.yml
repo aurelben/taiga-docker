@@ -11,7 +11,7 @@ services:
       - ./database:/var/lib/postgresql/data
     networks:
       web:
-        external:
+        overlay:
           name: traefik-net
 
   taiga:
@@ -37,5 +37,5 @@ services:
       - ./taiga-conf:/taiga
     networks:
       web:
-        external:
+        overlay:
           name: traefik-net
